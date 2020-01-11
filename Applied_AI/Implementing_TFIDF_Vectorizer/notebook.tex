@@ -1,0 +1,723 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{kumarojhaashutosh@gmail.com\_assignment3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Assignment}\label{assignment}
+
+    What does tf-idf mean?
+
+Tf-idf stands for term frequency-inverse document frequency, and the
+tf-idf weight is a weight often used in information retrieval and text
+mining. This weight is a statistical measure used to evaluate how
+important a word is to a document in a collection or corpus. The
+importance increases proportionally to the number of times a word
+appears in the document but is offset by the frequency of the word in
+the corpus. Variations of the tf-idf weighting scheme are often used by
+search engines as a central tool in scoring and ranking a document's
+relevance given a user query.
+
+One of the simplest ranking functions is computed by summing the tf-idf
+for each query term; many more sophisticated ranking functions are
+variants of this simple model.
+
+Tf-idf can be successfully used for stop-words filtering in various
+subject fields including text summarization and classification.
+
+    How to Compute:
+
+Typically, the tf-idf weight is composed by two terms: the first
+computes the normalized Term Frequency (TF), aka. the number of times a
+word appears in a document, divided by the total number of words in that
+document; the second term is the Inverse Document Frequency (IDF),
+computed as the logarithm of the number of the documents in the corpus
+divided by the number of documents where the specific term appears.
+
+\begin{verbatim}
+<li>
+\end{verbatim}
+
+TF: Term Frequency, which measures how frequently a term occurs in a
+document. Since every document is different in length, it is possible
+that a term would appear much more times in long documents than shorter
+ones. Thus, the term frequency is often divided by the document length
+(aka. the total number of terms in the document) as a way of
+normalization:
+
+\(TF(t) = \frac{\text{Number of times term t appears in a document}}{\text{Total number of terms in the document}}.\)
+
+IDF: Inverse Document Frequency, which measures how important a term is.
+While computing TF, all terms are considered equally important. However
+it is known that certain terms, such as "is", "of", and "that", may
+appear a lot of times but have little importance. Thus we need to weigh
+down the frequent terms while scale up the rare ones, by computing the
+following:
+
+\(IDF(t) = \log_{e}\frac{\text{Total  number of documents}} {\text{Number of documents with term t in it}}.\)
+for numerical stabiltiy we will be changing this formula little bit
+\(IDF(t) = \log_{e}\frac{\text{Total  number of documents}} {\text{Number of documents with term t in it}+1}.\)
+
+Example
+
+Consider a document containing 100 words wherein the word cat appears 3
+times. The term frequency (i.e., tf) for cat is then (3 / 100) = 0.03.
+Now, assume we have 10 million documents and the word cat appears in one
+thousand of these. Then, the inverse document frequency (i.e., idf) is
+calculated as log(10,000,000 / 1,000) = 4. Thus, the Tf-idf weight is
+the product of these quantities: 0.03 * 4 = 0.12.
+
+    \subsection{Task-1}\label{task-1}
+
+    1. Build a TFIDF Vectorizer \& compare its results with Sklearn:
+
+\begin{verbatim}
+<li> As a part of this task you will be implementing TFIDF vectorizer on a collection of text documents.</li>
+<br>
+<li> You should compare the results of your own implementation of TFIDF vectorizer with that of sklearns implemenation TFIDF vectorizer.</li>
+<br>
+<li> Sklearn does few more tweaks in the implementation of its version of TFIDF vectorizer, so to replicate the exact results you would need to add following things to your custom implementation of tfidf vectorizer:
+   <ol>
+    <li> Sklearn has its vocabulary generated from idf sroted in alphabetical order</li>
+    <li> Sklearn formula of idf is different from the standard textbook formula. Here the constant <strong>"1"</strong> is added to the numerator and denominator of the idf as if an extra document was seen containing every term in the collection exactly once, which prevents zero divisions.
+        
+\end{verbatim}
+
+\(IDF(t) = 1+\log_{e}\frac{1\text{ }+\text{ Total  number of documents in collection}} {1+\text{Number of documents with term t in it}}.\)
+
+\begin{verbatim}
+    <li> Sklearn applies L2-normalization on its output matrix.</li>
+    <li> The final output of sklearn tfidf vectorizer is a sparse matrix.</li>
+</ol>
+<br>
+<li>Steps to approach this task:
+<ol>
+    <li> You would have to write both fit and transform methods for your custom implementation of tfidf vectorizer.</li>
+    <li> Print out the alphabetically sorted voacb after you fit your data and check if its the same as that of the feature names from sklearn tfidf vectorizer. </li>
+    <li> Print out the idf values from your implementation and check if its the same as that of sklearns tfidf vectorizer idf values. </li>
+    <li> Once you get your voacb and idf values to be same as that of sklearns implementation of tfidf vectorizer, proceed to the below steps. </li>
+    <li> Make sure the output of your implementation is a sparse matrix. Before generating the final output, you need to normalize your sparse matrix using L2 normalization. You can refer to this link https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html </li>
+    <li> After completing the above steps, print the output of your custom implementation and compare it with sklearns implementation of tfidf vectorizer.</li>
+    <li> To check the output of a single document in your collection of documents,  you can convert the sparse matrix related only to that document into dense matrix and print it.</li>
+    </ol>
+</li>
+<br>
+\end{verbatim}
+
+Note-1: All the necessary outputs of sklearns tfidf vectorizer have been
+provided as reference in this notebook, you can compare your outputs as
+mentioned in the above steps, with these outputs. Note-2: The output of
+your custom implementation and that of sklearns implementation would
+match only with the collection of document strings provided to you as
+reference in this notebook. It would not match for strings that contain
+capital letters or punctuations, etc, because sklearn version of tfidf
+vectorizer deals with such strings in a different way. To know further
+details about how sklearn tfidf vectorizer works with such string, you
+can always refer to its official documentation. Note-3: During this
+task, it would be helpful for you to debug the code you write with print
+statements wherever necessary. But when you are finally submitting the
+assignment, make sure your code is readable and try not to print things
+which are not part of this task.
+
+    \subsubsection{Corpus}\label{corpus}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} SkLearn\PYZsh{} Collection of string documents}
+         
+         \PY{n}{corpus} \PY{o}{=} \PY{p}{[}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{this is the first document}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{this document is the second document}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{and this is the third one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is this the first document}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{p}{]}
+\end{Verbatim}
+
+
+    \subsubsection{SkLearn Implementation}\label{sklearn-implementation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}
+        \PY{n}{vectorizer} \PY{o}{=} \PY{n}{TfidfVectorizer}\PY{p}{(}\PY{p}{)}
+        \PY{n}{vectorizer}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{corpus}\PY{p}{)}
+        \PY{n}{skl\PYZus{}output} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{corpus}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} sklearn feature names, they are sorted in alphabetic order by default.}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{vectorizer}\PY{o}{.}\PY{n}{get\PYZus{}feature\PYZus{}names}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['and', 'document', 'first', 'is', 'one', 'second', 'the', 'third', 'this']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Here we will print the sklearn tfidf vectorizer idf values after applying the fit method}
+        \PY{c+c1}{\PYZsh{} After using the fit function on the corpus the vocab has 9 words in it, and each has its idf value.}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{vectorizer}\PY{o}{.}\PY{n}{idf\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1.91629073 1.22314355 1.51082562 1.         1.91629073 1.91629073
+ 1.         1.91629073 1.        ]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} shape of sklearn tfidf vectorizer output after applying transform method.}
+        
+        \PY{n}{skl\PYZus{}output}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} (4, 9)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} sklearn tfidf values for first line of the above corpus.}
+        \PY{c+c1}{\PYZsh{} Here the output is a sparse matrix}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{skl\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  (0, 8)	0.38408524091481483
+  (0, 6)	0.38408524091481483
+  (0, 3)	0.38408524091481483
+  (0, 2)	0.5802858236844359
+  (0, 1)	0.46979138557992045
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} sklearn tfidf values for first line of the above corpus.}
+        \PY{c+c1}{\PYZsh{} To understand the output better, here we are converting the sparse output matrix to dense matrix and printing it.}
+        \PY{c+c1}{\PYZsh{} Notice that this output is normalized using L2 normalization. sklearn does this by default.}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{skl\PYZus{}output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{toarray}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0.         0.46979139 0.58028582 0.38408524 0.         0.
+  0.38408524 0.         0.38408524]]
+
+    \end{Verbatim}
+
+    \subsubsection{Your custom
+implementation}\label{your-custom-implementation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} Write your code here.}
+         \PY{c+c1}{\PYZsh{} Make sure its well documented and readble with appropriate comments.}
+         \PY{c+c1}{\PYZsh{} Compare your results with the above sklearn tfidf vectorizer}
+         \PY{c+c1}{\PYZsh{} You are not supposed to use any other library apart from the ones given below}
+         
+         \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+         \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{sparse} \PY{k}{import} \PY{n}{csr\PYZus{}matrix}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{operator}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{normalize}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{dataset}\PY{p}{,}\PY{p}{(}\PY{n+nb}{list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}tf = []}
+                 \PY{n}{idf} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{unique\PYZus{}words} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{dataset}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{row}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mi}{2}\PY{p}{:}
+                             \PY{k}{continue}
+                         \PY{n}{unique\PYZus{}words}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                 \PY{n}{unique\PYZus{}words} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{unique\PYZus{}words}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{unique\PYZus{}words}\PY{p}{:}
+                     \PY{n}{occur} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{dataset}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{row}\PY{p}{:}
+                             \PY{n}{occur} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{n}{idf}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{occur}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}vocab = \PYZob{}i:j for j,i in enumerate(unique\PYZus{}words)\PYZcb{}}
+                 \PY{k}{return} \PY{n}{unique\PYZus{}words}\PY{p}{,} \PY{n}{idf}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dataset must be an instance of list.}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n}{document}\PY{p}{,}\PY{n}{unique\PYZus{}words}\PY{p}{,}\PY{n}{idf}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{document}\PY{p}{,}\PY{p}{(}\PY{n+nb}{list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{rows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{vals} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{document}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{word\PYZus{}freq} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{Counter}\PY{p}{(}\PY{n}{row}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{word}\PY{p}{,} \PY{n}{freq} \PY{o+ow}{in} \PY{n}{word\PYZus{}freq}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mi}{2}\PY{p}{:}
+                             \PY{k}{continue}
+                         \PY{n}{col\PYZus{}idx} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                         \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{unique\PYZus{}words}\PY{p}{:}
+                             \PY{n}{col\PYZus{}idx} \PY{o}{=} \PY{n}{unique\PYZus{}words}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                         \PY{k}{if} \PY{n}{col\PYZus{}idx} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                             \PY{n}{rows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{idx}\PY{p}{)}
+                             \PY{n}{cols}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col\PYZus{}idx}\PY{p}{)}
+                             \PY{n}{tf} \PY{o}{=} \PY{n}{freq}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+                             \PY{n}{vals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tf}\PY{o}{*}\PY{n}{idf}\PY{p}{[}\PY{n}{col\PYZus{}idx}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{normalize}\PY{p}{(}\PY{n}{csr\PYZus{}matrix}\PY{p}{(}\PY{p}{(}\PY{n}{vals}\PY{p}{,}\PY{p}{(}\PY{n}{rows}\PY{p}{,}\PY{n}{cols}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{document}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{unique\PYZus{}words}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dataset must be an instance of list.}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{unique\PYZus{}words}\PY{p}{,} \PY{n}{idf} \PY{o}{=} \PY{n}{fit}\PY{p}{(}\PY{n}{corpus}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{unique\PYZus{}words}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{idf}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['and', 'document', 'first', 'is', 'one', 'second', 'the', 'third', 'this']
+[1.916290731874155, 1.2231435513142097, 1.5108256237659907, 1.0, 1.916290731874155, 1.916290731874155, 1.0, 1.916290731874155, 1.0]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{output} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{corpus}\PY{p}{,}\PY{n}{unique\PYZus{}words}\PY{p}{,} \PY{n}{idf}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  (0, 1)	0.46979138557992045
+  (0, 2)	0.5802858236844359
+  (0, 3)	0.3840852409148149
+  (0, 6)	0.3840852409148149
+  (0, 8)	0.3840852409148149
+
+    \end{Verbatim}
+
+    \subsection{Task-2}\label{task-2}
+
+    2. Implement max features functionality:
+
+\begin{verbatim}
+<li> As a part of this task you have to modify your fit and transform functions so that your vocab will contain only 50 terms with top idf scores.</li>
+<br>
+<li>This task is similar to your previous task, just that here your vocabulary is limited to only top 50 features names based on their idf values. Basically your output will have exactly 50 columns and the number of rows will depend on the number of documents you have in your corpus.</li>
+<br>
+<li>Here you will be give a pickle file, with file name <strong>cleaned_strings</strong>. You would have to load the corpus from this file and use it as input to your tfidf vectorizer.</li>
+<br>
+<li>Steps to approach this task:
+<ol>
+    <li> You would have to write both fit and transform methods for your custom implementation of tfidf vectorizer, just like in the previous task. Additionally, here you have to limit the number of features generated to 50 as described above.</li>
+    <li> Now sort your vocab based in descending order of idf values and print out the words in the sorted voacb after you fit your data. Here you should be getting only 50 terms in your vocab. And make sure to print idf values for each term in your vocab. </li>
+    <li> Make sure the output of your implementation is a sparse matrix. Before generating the final output, you need to normalize your sparse matrix using L2 normalization. You can refer to this link https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html </li>
+    <li> Now check the output of a single document in your collection of documents,  you can convert the sparse matrix related only to that document into dense matrix and print it. And this dense matrix should contain 1 row and 50 columns. </li>
+    </ol>
+</li>
+<br>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{} Below is the code to load the cleaned\PYZus{}strings pickle file provided}
+         \PY{c+c1}{\PYZsh{} Here corpus is of list type}
+         
+         \PY{k+kn}{import} \PY{n+nn}{pickle}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}strings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{corpus2} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} printing the length of the corpus loaded}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of documents in corpus = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{corpus2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of documents in corpus =  4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k}{def} \PY{n+nf}{fit2}\PY{p}{(}\PY{n}{dataset}\PY{p}{,}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} n controls the number of columns in the final output}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{dataset}\PY{p}{,}\PY{p}{(}\PY{n+nb}{list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{vocab} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                 \PY{n}{idf} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{unique\PYZus{}words} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{dataset}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{row}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mi}{2}\PY{p}{:}
+                             \PY{k}{continue}
+                         \PY{n}{unique\PYZus{}words}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                 \PY{n}{unique\PYZus{}words} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{unique\PYZus{}words}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{unique\PYZus{}words}\PY{p}{:}
+                     \PY{n}{occur} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{dataset}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{row}\PY{p}{:}
+                             \PY{n}{occur} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{n}{idf\PYZus{}val} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{occur}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{idf}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{idf\PYZus{}val}\PY{p}{)}
+                     \PY{n}{vocab}\PY{p}{[}\PY{n}{word}\PY{p}{]} \PY{o}{=} \PY{n}{idf\PYZus{}val}
+                 \PY{n}{idf} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{unique\PYZus{}words} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{sorted\PYZus{}vocab} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{vocab}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{kv}\PY{p}{:} \PY{n}{kv}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{voc} \PY{o+ow}{in} \PY{n}{sorted\PYZus{}vocab}\PY{p}{:}
+                     \PY{n}{unique\PYZus{}words}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{voc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{idf}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{voc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{unique\PYZus{}words}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}\PY{p}{,} \PY{n}{idf}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}
+             
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dataset must be an instance of list.}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{c+c1}{\PYZsh{} Write your code here.}
+         \PY{c+c1}{\PYZsh{} Try not to hardcode any values.}
+         \PY{c+c1}{\PYZsh{} Make sure its well documented and readble with appropriate comments.}
+         \PY{k}{def} \PY{n+nf}{transform2}\PY{p}{(}\PY{n}{document}\PY{p}{,}\PY{n}{unique\PYZus{}words}\PY{p}{,}\PY{n}{idf}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{document}\PY{p}{,}\PY{p}{(}\PY{n+nb}{list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{rows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{vals} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{document}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{word\PYZus{}freq} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{Counter}\PY{p}{(}\PY{n}{row}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{word}\PY{p}{,} \PY{n}{freq} \PY{o+ow}{in} \PY{n}{word\PYZus{}freq}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mi}{2}\PY{p}{:}
+                             \PY{k}{continue}
+                         \PY{n}{col\PYZus{}idx} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                         \PY{k}{if} \PY{n}{word} \PY{o+ow}{in} \PY{n}{unique\PYZus{}words}\PY{p}{:}
+                             \PY{n}{col\PYZus{}idx} \PY{o}{=} \PY{n}{unique\PYZus{}words}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                         \PY{k}{if} \PY{n}{col\PYZus{}idx} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                             \PY{n}{rows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{idx}\PY{p}{)}
+                             \PY{n}{cols}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col\PYZus{}idx}\PY{p}{)}
+                             \PY{n}{tf} \PY{o}{=} \PY{n}{freq}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{row}\PY{p}{)}
+                             \PY{n}{vals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tf}\PY{o}{*}\PY{n}{idf}\PY{p}{[}\PY{n}{col\PYZus{}idx}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{normalize}\PY{p}{(}\PY{n}{csr\PYZus{}matrix}\PY{p}{(}\PY{p}{(}\PY{n}{vals}\PY{p}{,}\PY{p}{(}\PY{n}{rows}\PY{p}{,}\PY{n}{cols}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{document}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{unique\PYZus{}words}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dataset must be an instance of list.}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{unique\PYZus{}words}\PY{p}{,} \PY{n}{idf} \PY{o}{=} \PY{n}{fit2}\PY{p}{(}\PY{n}{corpus2}\PY{p}{,}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{unique\PYZus{}words}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{idf}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['aailiyah', 'abandoned', 'abroad', 'abstruse', 'academy', 'accents', 'accessible', 'acclaimed', 'accolades', 'accurately', 'achille', 'ackerman', 'adams', 'added', 'admins', 'admiration', 'admitted', 'adrift', 'adventure', 'aesthetically', 'affected', 'affleck', 'afternoon', 'agreed', 'aimless', 'aired', 'akasha', 'alert', 'alike', 'allison', 'allowing', 'alongside', 'amateurish', 'amazed', 'amazingly', 'amusing', 'amust', 'anatomist', 'angela', 'angelina', 'angry', 'anguish', 'angus', 'animals', 'animated', 'anita', 'anniversary', 'anthony', 'antithesis', 'anyway']
+[6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872, 6.922918004572872]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{output} \PY{o}{=} \PY{n}{transform2}\PY{p}{(}\PY{n}{corpus2}\PY{p}{,}\PY{n}{unique\PYZus{}words}\PY{p}{,} \PY{n}{idf}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{toarray}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{output}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+  1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+  0. 0.]]
+(746, 50)
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
