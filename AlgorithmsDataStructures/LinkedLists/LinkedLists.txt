@@ -1,0 +1,32 @@
+Problems with array data structures:
+*fixed size
+*insertion and deletion in the middle are costly
+*queue and dequeue implementation is costly
+*sorting merge sort requires extra space (array)
+*in system programming with limited memory, if memory is fragmented, large arrays cannot be used 
+Problems with dynamic arrays (list,vector,arraylist):
+*Whenever the dynamic arrays run out of memory, a new array of double size is formed and all the data elements are copied in the new one which leads to additional overhead costs.
+
+#Linked list:
+*linear data structures
+*elements do not have to contiguous locations
+*every node stores reference/pointers to the next node and/or vice-versa
+Advantages:
+*no preallocation of nodes required
+*fragmented memory does not cause any problem
+*Insertion/deletion at any location is simple
+
+Question: Can you delete a node of a single linked list if it's pointer is given?
+Answer: Yes, copy the data of the next node to the node to be deleted. Then delete the next node.
+But it does not work in case the node to be deleted is the last node.   --Research more on this
+
+#Circular Linked List
+*Insert at end, delete at end and insert at beg, delete at beg both can be done in O(1) by maintaining just one pointer(tail).
+*Idle for implementing Queue
+*Idle for Round Robbin Algos
+**Can be both siglyCircularLinkedList and doublyCircularLinkedList
+
+#Double Linked List
+*Deletion can be done in O(1)
+*Insertion before a node can be done in O(1) if pointer to node is given
+*Dequeue (Doubly Ended Queue) operations can be done in O(1) time on both the nodes.In singleLinkedList operations at head are O(1) but at tail are of O(n)
