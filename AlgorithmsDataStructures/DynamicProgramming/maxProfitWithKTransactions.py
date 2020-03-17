@@ -26,7 +26,7 @@ def maxProfitWithKTransactions2(prices, k):
     oddProfits = [0 for d in prices]
     evenProfits = [0 for d in prices]
 
-    for t in range(1,k+1):
+    for t in range(1,k+1):  
         maxThusFar = float('-inf')
         if t%2 == 1:
             currentProfits = oddProfits
